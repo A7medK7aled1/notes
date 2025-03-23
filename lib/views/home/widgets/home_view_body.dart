@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notes/views/home/widgets/custom_app_bar.dart';
-
+import 'package:notes/views/home/widgets/custom_note_card.dart';
 import 'empty_note.dart';
 
 class HomeViewBody extends StatelessWidget {
@@ -17,13 +17,27 @@ class HomeViewBody extends StatelessWidget {
           color: Colors.white,
         ),
       ),
-      body: const SafeArea(
-        child: Column(
-          children: [
-            CustomAppBar(),
-            SizedBox(height: 80),
-            EmptyNotes(),
-          ],
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 18, vertical: 15),
+          child: Column(
+            children: [
+              const CustomAppBar(),
+              Expanded(
+                child: ListView.builder(
+                  padding: EdgeInsets.zero,
+                  itemCount: 15,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        CustomNoteCard(),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

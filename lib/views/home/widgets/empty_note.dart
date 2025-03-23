@@ -7,6 +7,7 @@ class EmptyNotes extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        SizedBox(height: 80),
         SizedBox(
           height: 287,
           width: 350,
