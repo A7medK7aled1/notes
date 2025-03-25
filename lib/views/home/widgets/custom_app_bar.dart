@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notes/views/home/widgets/custom_icon_button.dart';
 
-class CustomAppBar extends StatelessWidget {
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
 
   @override
@@ -27,4 +27,7 @@ class CustomAppBar extends StatelessWidget {
       ],
     );
   }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
