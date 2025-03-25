@@ -13,7 +13,8 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       home: HomeView(),
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(useMaterial3: false),
+      theme: ThemeData.dark(useMaterial3: false)
+          .copyWith(textTheme: const TextTheme().apply(fontFamily: 'Nunito')),
     );
   }
 }
