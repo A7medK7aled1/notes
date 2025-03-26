@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:notes/views/note/widgets/edit_note_view_body.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key});
+  const CustomAppBar({super.key, this.onPressed});
+
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      iconTheme: const IconThemeData(color: Colors.white),
-      actions: [
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
         IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.save),
-        ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.arrow_back)),
+        IconButton(onPressed: onPressed, icon: Icon(Icons.save)),
       ],
     );
   }
