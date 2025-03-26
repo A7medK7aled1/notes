@@ -25,36 +25,37 @@ class _EditNoteBodyState extends State<EditNoteBody> {
 
   @override
   Widget build(BuildContext context) {
+    var padding = Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Column(
+        children: [
+          CustomAppBar(onPressed: _validateAndSaveForm),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  CustomTextField(
+                    fontSize: 38,
+                    hintText: 'Title',
+                    onSaved: (value) => _title = value,
+                  ),
+                  const SizedBox(height: 16),
+                  CustomTextField(
+                    fontSize: 20,
+                    hintText: 'Type something...',
+                    onSaved: (value) => _subTitle = value,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
     return Form(
       autovalidateMode: _autovalidateMode,
       key: _formKey,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Column(
-          children: [
-            CustomAppBar(onPressed: _validateAndSaveForm),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    CustomTextField(
-                      fontSize: 38,
-                      hintText: 'Title',
-                      onSaved: (value) => _title = value,
-                    ),
-                    const SizedBox(height: 16),
-                    CustomTextField(
-                      fontSize: 20,
-                      hintText: 'Type something...',
-                      onSaved: (value) => _subTitle = value,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+      child: padding,
     );
   }
 }
