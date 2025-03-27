@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes/manager/cubit/notes_cubit/notes_cubit.dart';
 import 'package:notes/views/home/widgets/custom_app_bar.dart';
 import 'package:notes/views/home/widgets/custom_note_card.dart';
 import 'package:notes/views/note/edite_note_view.dart';
@@ -23,27 +25,30 @@ class HomeViewBody extends StatelessWidget {
           color: Colors.white,
         ),
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 18, vertical: 15),
-          child: Column(
-            children: [
-              const CustomAppBar(),
-              Expanded(
-                child: ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  padding: EdgeInsets.zero,
-                  itemCount: 15,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        CustomNoteCard(),
-                      ],
-                    );
-                  },
+      body: BlocProvider(
+        create: (context) => NotesCubit(),
+        child: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 18, vertical: 15),
+            child: Column(
+              children: [
+                const CustomAppBar(),
+                Expanded(
+                  child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    padding: EdgeInsets.zero,
+                    itemCount: 15,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        children: [
+                          CustomNoteCard(),
+                        ],
+                      );
+                    },
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
