@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes/manager/cubit/add_notes_cubit/add_notes_cubit.dart';
 import 'package:notes/models/note_model.dart';
 import 'package:notes/simble_bloc_observer.dart';
 import 'package:notes/views/home/home_view.dart';
@@ -9,8 +10,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = SimbleBlocObserver();
   await Hive.initFlutter();
-  await Hive.openBox('notes box');
   Hive.registerAdapter(NoteModelAdapter());
+  await Hive.openBox<NoteModel>('notes box');
+
   runApp(const MainApp());
 }
 

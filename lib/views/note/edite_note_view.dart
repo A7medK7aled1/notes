@@ -11,25 +11,33 @@ class EditNoteView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AddNotesCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AddNotesCubit>(
+          create: (context) => AddNotesCubit(),
+        ),
+      ],
       child: SafeArea(
-        child: Scaffold(
-          body: BlocConsumer<AddNotesCubit, AddNotesState>(
-            listener: (context, state) {
-              if (state is AddNotesFailure) {
-                log(state.errMessage);
-              }
-              if (state is AddNotesSuccess) {
-                Navigator.pop(context);
-              }
-            },
-            builder: (context, state) {
-              return ModalProgressHUD(
+        child: BlocConsumer<AddNotesCubit, AddNotesState>(
+          listener: (context, state) {
+            if (state is AddNotesSuccess) {
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Note added successfully.')),
+              );
+            } else if (state is AddNotesFailure) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Failed to add note.')),
+              );
+            }
+          },
+          builder: (context, state) {
+            return Scaffold(
+              body: ModalProgressHUD(
                   inAsyncCall: state is AddNotesLoading ? true : false,
-                  child: EditNoteBody());
-            },
-          ),
+                  child: EditNoteBody()),
+            );
+          },
         ),
       ),
     );
