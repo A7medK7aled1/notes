@@ -57,6 +57,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                           itemCount: notes.length,
                           itemBuilder: (context, index) {
                             return CustomNoteCard(
+                              backgroundColor: Colors.teal,
                               text: notes[index],
                             );
                           },

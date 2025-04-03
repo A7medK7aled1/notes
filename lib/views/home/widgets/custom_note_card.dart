@@ -16,28 +16,44 @@ class CustomNoteCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 90,
-      width: double.infinity,
-      margin: const EdgeInsets.only(top: 20),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        color: backgroundColor,
-      ),
-      child: Padding(
-        // Use const padding since values are fixed
-        padding: const EdgeInsets.all(10), // Simplified symmetric padding
-        child: Align(
-          // Consider removing Align if left alignment is always needed
-          alignment: Alignment.centerLeft,
-          child: Text(
-            maxLines: 2,
-            text.title,
-            style: const TextStyle(
-                fontSize: 18,
-                fontFamily: 'Nunito',
-                overflow: TextOverflow.ellipsis),
-          ),
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        height: 90,
+        width: double.infinity,
+        margin: const EdgeInsets.only(top: 20),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          color: backgroundColor,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Padding(
+              // Use const padding since values are fixed
+              padding: const EdgeInsets.all(10), // Simplified symmetric padding
+              child: Align(
+                // Consider removing Align if left alignment is always needed
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  maxLines: 2,
+                  text.title,
+                  style: const TextStyle(
+                      fontSize: 22,
+                      fontFamily: 'Nunito',
+                      overflow: TextOverflow.ellipsis),
+                ),
+              ),
+            ),
+            IconButton(
+                onPressed: () {
+                  text.delete();
+                },
+                icon: const Icon(
+                  Icons.delete,
+                  color: Colors.white60,
+                ))
+          ],
         ),
       ),
     );
