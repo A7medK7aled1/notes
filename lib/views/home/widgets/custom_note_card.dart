@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:notes/models/note_model.dart';
 
 class CustomNoteCard extends StatelessWidget {
   // Add const constructor with named parameters for better flexibility
   const CustomNoteCard({
     super.key,
     this.backgroundColor = const Color.fromARGB(255, 255, 0, 0),
-    this.text = 'Animes produced by Ufotable',
+    required this.text,
   });
 
   // Define properties as final for immutability
 
   final Color backgroundColor;
-  final String text;
+  final NoteModel text;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class CustomNoteCard extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: Text(
             maxLines: 2,
-            text,
+            text.title,
             style: const TextStyle(
                 fontSize: 18,
                 fontFamily: 'Nunito',
