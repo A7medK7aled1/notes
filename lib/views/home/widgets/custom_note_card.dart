@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes/manager/cubit/notes_cubit/notes_cubit.dart';
 import 'package:notes/models/note_model.dart';
+import 'package:notes/views/note/edite_note_view.dart';
 
 class CustomNoteCard extends StatelessWidget {
   // Add const constructor with named parameters for better flexibility
@@ -17,7 +20,18 @@ class CustomNoteCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => EditNoteView(
+              noteModel: text,
+            ),
+          ),
+        ).then((_) {
+          BlocProvider.of<NotesCubit>(context).fetchAllNotes();
+        });
+      },
       child: Container(
         height: 90,
         width: double.infinity,
@@ -48,6 +62,7 @@ class CustomNoteCard extends StatelessWidget {
             IconButton(
                 onPressed: () {
                   text.delete();
+                  BlocProvider.of<NotesCubit>(context).fetchAllNotes();
                 },
                 icon: const Icon(
                   Icons.delete,
